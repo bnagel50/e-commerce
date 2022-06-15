@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
   try {
-    await Tag.findOne({
+    Tag.findOne({
       where: { id: req.params.id },
       include: [
         {
@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // create a new tag
   try {
-    const newTag = await Tag.create({
+    const newTag = Tag.create({
       ...req.body
     })
     res.json(newTag)
@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
   try {
-    const [affectedTag] = await Tag.update(req.body, {
+    const [affectedTag] = Tag.update(req.body, {
       where: { id: req.params.id }
     })
     if (affectedTag > 0) {
@@ -73,7 +73,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
   try {
-    const [affectedTag] = await Tag.destroy({
+    const [affectedTag] = Tag.destroy({
       where: { id: req.params.id }
     })
     if (affectedTag > 0) {
